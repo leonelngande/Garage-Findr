@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Requests\CreateMechanicWorkshopRequest;
 use App\Http\Requests\UpdateMechanicWorkshopRequest;
 use App\Models\Quarter;
+use App\Models\VehicleType;
 use App\Repositories\MechanicWorkshopRepository;
 use App\Http\Controllers\AppBaseController;
 use Illuminate\Http\Request;
@@ -50,7 +51,9 @@ class MechanicWorkshopController extends AppBaseController
         });
         $quarters = $quarters->pluck('name', 'id')->prepend('Select a quarter', '');
 
-        return view('mechanic_workshops.create')->with(compact('quarters'));
+        $vehicleTypes = VehicleType::pluck('name', 'id');
+
+        return view('mechanic_workshops.create')->with(compact(['quarters', 'vehicleTypes']));
     }
 
     /**
@@ -65,6 +68,10 @@ class MechanicWorkshopController extends AppBaseController
         $input = $request->all();
 
         $mechanicWorkshop = $this->mechanicWorkshopRepository->create($input);
+
+        if ($request->has('vehicle_types')) {
+            $mechanicWorkshop->vehicleTypes()->sync($request->get('vehicle_types'));
+        }
 
         Flash::success('Mechanic Workshop saved successfully.');
 
@@ -115,7 +122,9 @@ class MechanicWorkshopController extends AppBaseController
         });
         $quarters = $quarters->pluck('name', 'id')->prepend('Select a quarter', '');
 
-        return view('mechanic_workshops.edit')->with(compact(['mechanicWorkshop', 'quarters']));
+        $vehicleTypes = VehicleType::pluck('name', 'id');
+
+        return view('mechanic_workshops.edit')->with(compact(['mechanicWorkshop', 'quarters', 'vehicleTypes']));
     }
 
     /**
@@ -137,6 +146,10 @@ class MechanicWorkshopController extends AppBaseController
         }
 
         $mechanicWorkshop = $this->mechanicWorkshopRepository->update($request->all(), $id);
+
+        if ($request->has('vehicle_types')) {
+            $mechanicWorkshop->vehicleTypes()->sync($request->get('vehicle_types'));
+        }
 
         Flash::success('Mechanic Workshop updated successfully.');
 
