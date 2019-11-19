@@ -48,3 +48,5 @@ Route::resource('guardians', 'GuardianController');
 
 
 Route::resource('quarters', 'QuarterController');
+
+Route::resource('mechanicWorkshops', 'MechanicWorkshopController');
