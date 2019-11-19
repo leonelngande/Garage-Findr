@@ -45,3 +45,6 @@ Route::resource('thumbPrints', 'ThumbPrintController');
 Route::resource('users', 'UserController');
 
 Route::resource('guardians', 'GuardianController');
+
+
+Route::resource('quarters', 'QuarterController');

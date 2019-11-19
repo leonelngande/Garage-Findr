@@ -15,3 +15,7 @@
     <a href="{!! route('subdivisions.index') !!}"><i class="fa fa-edit"></i><span>Subdivisions</span></a>
 </li>
 
+<li class="{{ Request::is('quarters*') ? 'active' : '' }}">
+    <a href="{!! route('quarters.index') !!}"><i class="fa fa-edit"></i><span>Quarters</span></a>
+</li>
+
