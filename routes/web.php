@@ -17,4 +17,31 @@ Route::get('/', function () {
 
 Auth::routes();
 
-Route::get('/home', 'HomeController@index');
+
+Route::get('/home', 'HomeController@index')->name('home');
+
+
+
+Route::resource('divisions', 'DivisionController');
+
+Route::resource('subdivisions', 'SubdivisionController');
+
+Route::resource('certificates', 'CertificateController');
+
+Route::resource('convictionRecords', 'ConvictionRecordController');
+
+Route::resource('convicts', 'ConvictController');
+
+Route::resource('judgements', 'JudgementController');
+
+
+
+Route::resource('sentences', 'SentenceController');
+
+Route::resource('sentenceReductions', 'SentenceReductionController');
+
+Route::resource('thumbPrints', 'ThumbPrintController');
+
+Route::resource('users', 'UserController');
+
+Route::resource('guardians', 'GuardianController');
