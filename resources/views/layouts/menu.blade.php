@@ -23,3 +23,7 @@
     <a href="{!! route('mechanicWorkshops.index') !!}"><i class="fa fa-edit"></i><span>Mechanic Workshops</span></a>
 </li>
 
+<li class="{{ Request::is('vehicleTypes*') ? 'active' : '' }}">
+    <a href="{!! route('vehicleTypes.index') !!}"><i class="fa fa-edit"></i><span>Vehicle Types</span></a>
+</li>
+
