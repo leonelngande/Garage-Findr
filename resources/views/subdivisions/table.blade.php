@@ -1,10 +1,28 @@
-@section('css')
-    @include('layouts.datatables_css')
-@endsection
-
-{!! $dataTable->table(['width' => '100%', 'class' => 'table table-striped table-bordered']) !!}
-
-@section('scripts')
-    @include('layouts.datatables_js')
-    {!! $dataTable->scripts() !!}
-@endsection
+<div class="table-responsive">
+    <table class="table" id="subdivisions-table">
+        <thead>
+        <tr>
+            <th>Name</th>
+            <th>Division</th>
+            <th colspan="3">Action</th>
+        </tr>
+        </thead>
+        <tbody>
+        @foreach($subdivisions as $subdivision)
+            <tr>
+                <td>{!! $subdivision->name !!}</td>
+                <td>{!! $subdivision->division->name !!}</td>
+                <td>
+                    {!! Form::open(['route' => ['subdivisions.destroy', $subdivision->id], 'method' => 'delete']) !!}
+                    <div class='btn-group'>
+                        <a href="{!! route('subdivisions.show', [$subdivision->id]) !!}" class='btn btn-default btn-xs'><i class="glyphicon glyphicon-eye-open"></i></a>
+                        <a href="{!! route('subdivisions.edit', [$subdivision->id]) !!}" class='btn btn-default btn-xs'><i class="glyphicon glyphicon-edit"></i></a>
+                        {!! Form::button('<i class="glyphicon glyphicon-trash"></i>', ['type' => 'submit', 'class' => 'btn btn-danger btn-xs', 'onclick' => "return confirm('Are you sure?')"]) !!}
+                    </div>
+                    {!! Form::close() !!}
+                </td>
+            </tr>
+        @endforeach
+        </tbody>
+    </table>
+</div>

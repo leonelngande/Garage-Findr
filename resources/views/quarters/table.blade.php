@@ -3,7 +3,7 @@
         <thead>
             <tr>
                 <th>Name</th>
-        <th>Subdivision Id</th>
+        <th>Subdivision</th>
                 <th colspan="3">Action</th>
             </tr>
         </thead>
@@ -11,7 +11,7 @@
         @foreach($quarters as $quarter)
             <tr>
                 <td>{!! $quarter->name !!}</td>
-            <td>{!! $quarter->subdivision_id !!}</td>
+            <td>{!! $quarter->subdivision->name !!}</td>
                 <td>
                     {!! Form::open(['route' => ['quarters.destroy', $quarter->id], 'method' => 'delete']) !!}
                     <div class='btn-group'>

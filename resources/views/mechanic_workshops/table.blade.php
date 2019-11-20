@@ -4,7 +4,7 @@
             <tr>
                 <th>Name</th>
         <th>Address</th>
-        <th>Quarter Id</th>
+        <th>Quarter</th>
                 <th colspan="3">Action</th>
             </tr>
         </thead>
@@ -13,7 +13,7 @@
             <tr>
                 <td>{!! $mechanicWorkshop->name !!}</td>
             <td>{!! $mechanicWorkshop->address !!}</td>
-            <td>{!! $mechanicWorkshop->quarter_id !!}</td>
+            <td>{!! $mechanicWorkshop->quarter->name !!}</td>
                 <td>
                     {!! Form::open(['route' => ['mechanicWorkshops.destroy', $mechanicWorkshop->id], 'method' => 'delete']) !!}
                     <div class='btn-group'>

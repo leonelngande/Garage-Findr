@@ -1,0 +1,60 @@
+[
+    {
+        "division": "Fako",
+        "subdivisions": [
+            "Muyuka",
+            "Tiko",
+            "Limbe 1st (West-Coast)",
+            "Limbe 2nd",
+            "Limbe 3rd",
+            "Buea"
+        ]
+    },
+    {
+        "division": "Kupe Muanenguba",
+        "subdivisions": [
+            "Bangem",
+            "Nguti",
+            "Tombel"
+        ]
+    },
+    {
+        "division": "Lebialem",
+        "subdivisions": [
+            "Fontem",
+            "Alou",
+            "Wabane"
+        ]
+    },
+    {
+        "division": "Manyu",
+        "subdivisions": [
+            "Akwaya",
+            "Mamfe",
+            "Eyumodjock",
+            "Upper-Bayang"
+        ]
+    },
+    {
+        "division": "Meme",
+        "subdivisions": [
+            "Kumba 1st",
+            "Kumba 2nd",
+            "Kumba 3rd",
+            "Konye",
+            "Mbonge"
+        ]
+    },
+    {
+        "division": "Ndian",
+        "subdivisions": [
+            "Bamusso",
+            "Ekondo-Titi (Dikome-Balue, Toko)",
+            "Isanguele",
+            "Mundemba",
+            "Kombo Abedimo",
+            "Kombo Idinti",
+            "Idabato"
+        ]
+    }
+]

@@ -2,14 +2,12 @@
 
 namespace App\Http\Controllers;
 
-use App\DataTables\SubdivisionDataTable;
-use App\Http\Requests;
 use App\Http\Requests\CreateSubdivisionRequest;
 use App\Http\Requests\UpdateSubdivisionRequest;
 use App\Models\Division;
 use App\Repositories\SubdivisionRepository;
 use Flash;
-use App\Http\Controllers\AppBaseController;
+use Illuminate\Http\Request;
 use Response;
 
 class SubdivisionController extends AppBaseController
@@ -25,12 +23,16 @@ class SubdivisionController extends AppBaseController
     /**
      * Display a listing of the Subdivision.
      *
-     * @param SubdivisionDataTable $subdivisionDataTable
+     * @param Request $request
+     *
      * @return Response
      */
-    public function index(SubdivisionDataTable $subdivisionDataTable)
+    public function index(Request $request)
     {
-        return $subdivisionDataTable->render('subdivisions.index');
+        $subdivisions = $this->subdivisionRepository->all();
+
+        return view('subdivisions.index')
+            ->with('subdivisions', $subdivisions);
     }
 
     /**
