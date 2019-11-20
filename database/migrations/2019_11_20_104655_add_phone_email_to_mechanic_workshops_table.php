@@ -7,13 +7,19 @@ use Illuminate\Database\Migrations\Migration;
 class AddPhoneEmailToMechanicWorkshopsTable extends Migration
 {
     /**
+     * Schema table name to migrate
+     * @var string
+     */
+    public $tableName = 'mechanic_workshops';
+
+    /**
      * Run the migrations.
      *
      * @return void
      */
     public function up()
     {
-        Schema::table((new CreateMechanicWorkshopsTable())->tableName, function (Blueprint $table) {
+        Schema::table($this->tableName, function (Blueprint $table) {
             $table->string('email')->nullable();
             $table->string('phone');
         });
@@ -26,7 +32,7 @@ class AddPhoneEmailToMechanicWorkshopsTable extends Migration
      */
     public function down()
     {
-        Schema::table((new CreateMechanicWorkshopsTable())->tableName, function (Blueprint $table) {
+        Schema::table($this->tableName, function (Blueprint $table) {
             $table->dropColumn('email');
             $table->dropColumn('phone');
         });

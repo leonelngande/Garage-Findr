@@ -34,7 +34,9 @@ class MechanicWorkshop extends Model
     public $fillable = [
         'name',
         'address',
-        'quarter_id'
+        'quarter_id',
+        'email',
+        'phone'
     ];
 
     /**
@@ -56,7 +58,8 @@ class MechanicWorkshop extends Model
      */
     public static $rules = [
         'name' => 'required',
-        'quarter_id' => 'required'
+        'quarter_id' => 'required',
+        'phone' => 'required'
     ];
 
     /**

@@ -22,13 +22,14 @@ class CreateMechanicWorkshopVehicleTypesTable extends Migration
     {
         Schema::create($this->tableName, function (Blueprint $table) {
             $table->engine = 'InnoDB';
-            $table->bigIncrements('vehicle_type_id');
+            $table->unsignedBigInteger('vehicle_type_id');
             $table->unsignedBigInteger('mechanic_workshop_id');
 
             $table->index(["mechanic_workshop_id"], 'fk_vehicle_types_has_mechanic_workshop_mechanic_workshop1_idx');
 
             $table->index(["vehicle_type_id"], 'fk_vehicle_types_has_mechanic_workshop_vehicle_types1_idx');
 
+            $table->primary(['vehicle_type_id', 'mechanic_workshop_id'], 'mechanic_workshop_vehicle_types_primary');
 
             $table->foreign('vehicle_type_id', 'fk_vehicle_types_has_mechanic_workshop_vehicle_types1_idx')
                 ->references('id')->on('vehicle_types')
