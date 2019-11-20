@@ -17,9 +17,9 @@ Route::get('/', 'HomeController@welcome')->name('welcome');
 
 Auth::routes();
 
-Route::get('/home', 'HomeController@index')->name('home');
+Route::get('/home', 'HomeController@index')->name('home')->middleware('auth');
 // Just a copy of the home route renamed to admin so we can have /admin in the url bar
-Route::get('/admin', 'HomeController@index')->name('admin');
+Route::get('/admin', 'HomeController@index')->name('admin')->middleware('auth');
 
 
 Route::resource('divisions', 'DivisionController');

@@ -38,7 +38,7 @@
             <div class="site-mobile-menu-body"></div>
         </div>
 
-        <header class="site-navbar container py-0 bg-white" role="banner">
+        <header class="site-navbar container py-0 bg-white" role="banner" style="width: 15%;">
 
             <!-- <div class="container"> -->
             <div class="row align-items-center">
@@ -64,34 +64,42 @@
                         <div class="row justify-content-center mb-4">
                             <div class="col-md-8 text-center">
                                 <h1 class="" data-aos="fade-up">Find Auto Repairs Near You</h1>
-                                <p data-aos="fade-up" data-aos-delay="100">You can search by quarter, subdivision, division, and vehicle types supported.</p>
+                                <p data-aos="fade-up" data-aos-delay="100">You can search by quarter name and vehicle type.</p>
                             </div>
                         </div>
 
                         <div class="form-search-wrap" data-aos="fade-up" data-aos-delay="200">
-                            <form method="post">
+                            <form method="GET" action="{{url('/#mechanic-workshops')}}">
+                                @csrf
                                 <div class="row align-items-center">
-                                    <div class="col-lg-12 mb-4 mb-xl-0 col-xl-4">
+                                    {{--<div class="col-lg-12 mb-4 mb-xl-0 col-xl-4">
                                         <input type="text" class="form-control rounded" placeholder="What are you looking for?">
-                                    </div>
-                                    <div class="col-lg-12 mb-4 mb-xl-0 col-xl-3">
-                                        <div class="wrap-icon">
+                                    </div>--}}
+                                    <div class="col-lg-12 mb-4 mb-xl-0 col-xl-5">
+                                        {{--<div class="wrap-icon">
                                             <span class="icon icon-room"></span>
                                             <input type="text" class="form-control rounded" placeholder="Location">
+                                        </div>--}}
+
+                                        <div class="select-wrap">
+                                            <span class="icon"><span class="icon icon-room"></span></span>
+                                            <select class="form-control rounded" name="quarter_id">
+                                                <option value="">All Locations</option>
+                                                @foreach($quarters as $quarter)
+                                                    <option value="{{$quarter->id}}" {{ $quarter->id == old("quarter_id") ? "selected": ""}}>{{$quarter->name . ' (' . $quarter->subdivision->name . ', ' . $quarter->subdivision->division->name . ')'}}</option>
+                                                @endforeach
+                                            </select>
                                         </div>
 
                                     </div>
-                                    <div class="col-lg-12 mb-4 mb-xl-0 col-xl-3">
+                                    <div class="col-lg-12 mb-4 mb-xl-0 col-xl-5">
                                         <div class="select-wrap">
                                             <span class="icon"><span class="icon-keyboard_arrow_down"></span></span>
-                                            <select class="form-control rounded" name="" id="">
-                                                <option value="">All Categories</option>
-                                                <option value="">Real Estate</option>
-                                                <option value="">Books &amp;  Magazines</option>
-                                                <option value="">Furniture</option>
-                                                <option value="">Electronics</option>
-                                                <option value="">Cars &amp; Vehicles</option>
-                                                <option value="">Others</option>
+                                            <select class="form-control rounded" name="vehicle_type_id" id="">
+                                                <option value="">All Vehicle Types</option>
+                                                @foreach($vehicleTypes as $vehicleType)
+                                                    <option value="{{$vehicleType->id}}" {{ $vehicleType->id == old("vehicle_type_id") ? "selected": ""}}>{{$vehicleType->name}}</option>
+                                                @endforeach
                                             </select>
                                         </div>
                                     </div>
@@ -162,6 +170,7 @@
         </div>
 
 
+        <div id="mechanic-workshops"></div>
         <div class="site-section bg-light">
             <div class="container">
                 <div class="row mb-5">
@@ -176,219 +185,47 @@
                             <div class="d-block d-md-flex listing">
                                 <div class="lh-content">
                                     <span class="category">
-                                        <span class="icon-map-marker mechanic-card__icon"></span> {{$workshop->quarter->subdivision->division->name}} <small>></small> {{$workshop->quarter->subdivision->name}} <small>></small> {{$workshop->quarter->name}}
+                                        <span class="icon icon-room mechanic-card__icon"></span> {{$workshop->quarter->subdivision->division->name}} <small>></small> {{$workshop->quarter->subdivision->name}} <small>></small> {{$workshop->quarter->name}}
                                     </span>
                                     <h3>{{$workshop->name}}</h3>
+
+                                    <hr>
+                                    <div><small>Vehicle Types:</small></div>
+                                    <ul style="list-style-type: square;">
+                                        @foreach($workshop->vehicleTypes as $vehicleType)
+                                            <li>{{$vehicleType->name}}</li>
+                                        @endforeach
+                                    </ul>
+
                                     <address>{{$workshop->address}}</address>
+                                    <hr>
                                     <span class="category">
                                         <a href="tel:{{$workshop->phone}}">
                                             <span class="icon-phone mechanic-card__icon"></span>
-                                        </a>
+                                        </a>&nbsp;&nbsp;
                                         <a href="sms:{{$workshop->phone}}">
                                             <span class="icon-textsms mechanic-card__icon"></span>
-                                        </a> {{$workshop->phone}}
+                                        </a>&nbsp;&nbsp; {{$workshop->phone}}
                                     </span>
                                 </div>
                             </div>
-                            {{--<div class="d-block d-md-flex listing">
-                                <a href="listings-single.html" class="img d-block" style="background-image: url('images/img_3.jpg')"></a>
-                                <div class="lh-content">
-                                    <span class="category">Furniture</span>
-                                    <a href="#" class="bookmark"><span class="icon-heart"></span></a>
-                                    <h3><a href="listings-single.html">Wooden Chair &amp; Table</a></h3>
-                                    <address>Don St, Brooklyn, New York</address>
-                                    <p class="mb-0">
-                                        <span class="icon-star text-warning"></span>
-                                        <span class="icon-star text-warning"></span>
-                                        <span class="icon-star text-warning"></span>
-                                        <span class="icon-star text-warning"></span>
-                                        <span class="icon-star text-secondary"></span>
-                                        <span class="review">(3 Reviews)</span>
-                                    </p>
-                                </div>
-                            </div>--}}
+
                         </div>
                     @endforeach
-                    {{--<div class="col-lg-6">
-
-                        <div class="d-block d-md-flex listing">
-                            <a href="listings-single.html" class="img d-block" style="background-image: url('images/img_2.jpg')"></a>
-                            <div class="lh-content">
-                                <span class="category">Real Estate</span>
-                                <a href="#" class="bookmark"><span class="icon-heart"></span></a>
-                                <h3><a href="listings-single.html">House with Swimming Pool</a></h3>
-                                <address>Don St, Brooklyn, New York</address>
-                            </div>
-                        </div>
-                        <div class="d-block d-md-flex listing">
-                            <a href="listings-single.html" class="img d-block" style="background-image: url('images/img_3.jpg')"></a>
-                            <div class="lh-content">
-                                <span class="category">Furniture</span>
-                                <a href="#" class="bookmark"><span class="icon-heart"></span></a>
-                                <h3><a href="listings-single.html">Wooden Chair &amp; Table</a></h3>
-                                <address>Don St, Brooklyn, New York</address>
-                                <p class="mb-0">
-                                    <span class="icon-star text-warning"></span>
-                                    <span class="icon-star text-warning"></span>
-                                    <span class="icon-star text-warning"></span>
-                                    <span class="icon-star text-warning"></span>
-                                    <span class="icon-star text-secondary"></span>
-                                    <span class="review">(3 Reviews)</span>
-                                </p>
-                            </div>
-                        </div>
-
-                        <div class="d-block d-md-flex listing">
-                            <a href="listings-single.html" class="img d-block" style="background-image: url('images/img_4.jpg')"></a>
-                            <div class="lh-content">
-                                <span class="category">Electronics</span>
-                                <a href="#" class="bookmark"><span class="icon-heart"></span></a>
-                                <h3><a href="listings-single.html">iPhone X gray</a></h3>
-                                <address>Don St, Brooklyn, New York</address>
-                                <p class="mb-0">
-                                    <span class="icon-star text-warning"></span>
-                                    <span class="icon-star text-warning"></span>
-                                    <span class="icon-star text-warning"></span>
-                                    <span class="icon-star text-warning"></span>
-                                    <span class="icon-star text-secondary"></span>
-                                    <span class="review">(3 Reviews)</span>
-                                </p>
-                            </div>
-                        </div>
-
-
-
-                    </div>
-                    <div class="col-lg-6">
-
-                        <div class="d-block d-md-flex listing">
-                            <a href="listings-single.html" class="img d-block" style="background-image: url('images/img_1.jpg')"></a>
-                            <div class="lh-content">
-                                <span class="category">Cars &amp; Vehicles</span>
-                                <a href="#" class="bookmark"><span class="icon-heart"></span></a>
-                                <h3><a href="listings-single.html">Red Luxury Car</a></h3>
-                                <address>Don St, Brooklyn, New York</address>
-                                <p class="mb-0">
-                                    <span class="icon-star text-warning"></span>
-                                    <span class="icon-star text-warning"></span>
-                                    <span class="icon-star text-warning"></span>
-                                    <span class="icon-star text-warning"></span>
-                                    <span class="icon-star text-secondary"></span>
-                                    <span class="review">(3 Reviews)</span>
-                                </p>
-                            </div>
-                        </div>
-
-                        <div class="d-block d-md-flex listing">
-                            <a href="listings-single.html" class="img d-block" style="background-image: url('images/img_2.jpg')"></a>
-                            <div class="lh-content">
-                                <span class="category">Real Estate</span>
-                                <a href="#" class="bookmark"><span class="icon-heart"></span></a>
-                                <h3><a href="listings-single.html">House with Swimming Pool</a></h3>
-                                <address>Don St, Brooklyn, New York</address>
-                                <p class="mb-0">
-                                    <span class="icon-star text-warning"></span>
-                                    <span class="icon-star text-warning"></span>
-                                    <span class="icon-star text-warning"></span>
-                                    <span class="icon-star text-warning"></span>
-                                    <span class="icon-star text-secondary"></span>
-                                    <span class="review">(3 Reviews)</span>
-                                </p>
-                            </div>
-                        </div>
-                        <div class="d-block d-md-flex listing">
-                            <a href="listings-single.html" class="img d-block" style="background-image: url('images/img_3.jpg')"></a>
-                            <div class="lh-content">
-                                <span class="category">Furniture</span>
-                                <a href="#" class="bookmark"><span class="icon-heart"></span></a>
-                                <h3><a href="listings-single.html">Wooden Chair &amp; Table</a></h3>
-                                <address>Don St, Brooklyn, New York</address>
-                                <p class="mb-0">
-                                    <span class="icon-star text-warning"></span>
-                                    <span class="icon-star text-warning"></span>
-                                    <span class="icon-star text-warning"></span>
-                                    <span class="icon-star text-warning"></span>
-                                    <span class="icon-star text-secondary"></span>
-                                    <span class="review">(3 Reviews)</span>
-                                </p>
-                            </div>
-                        </div>
-
-                    </div>--}}
-                </div>
-            </div>
-        </div>
-
-        <div class="site-section bg-white">
-            <div class="container">
-
-                <div class="row justify-content-center mb-5">
-                    <div class="col-md-7 text-center border-primary">
-                        <h2 class="font-weight-light text-primary">Testimonials</h2>
-                    </div>
-                </div>
-
-                <div class="slide-one-item home-slider owl-carousel">
-                    <div>
-                        <div class="testimonial">
-                            <figure class="mb-4">
-                                <img src="images/person_3.jpg" alt="Image" class="img-fluid mb-3">
-                                <p>John Smith</p>
-                            </figure>
-                            <blockquote>
-                                <p>&ldquo;Lorem ipsum dolor sit amet consectetur adipisicing elit. Consectetur unde reprehenderit aperiam quaerat fugiat repudiandae explicabo animi minima fuga beatae illum eligendi incidunt consequatur. Amet dolores excepturi earum unde iusto.&rdquo;</p>
-                            </blockquote>
-                        </div>
-                    </div>
-                    <div>
-                        <div class="testimonial">
-                            <figure class="mb-4">
-                                <img src="images/person_2.jpg" alt="Image" class="img-fluid mb-3">
-                                <p>Christine Aguilar</p>
-                            </figure>
-                            <blockquote>
-                                <p>&ldquo;Lorem ipsum dolor sit amet consectetur adipisicing elit. Consectetur unde reprehenderit aperiam quaerat fugiat repudiandae explicabo animi minima fuga beatae illum eligendi incidunt consequatur. Amet dolores excepturi earum unde iusto.&rdquo;</p>
-                            </blockquote>
-                        </div>
-                    </div>
-
-                    <div>
-                        <div class="testimonial">
-                            <figure class="mb-4">
-                                <img src="images/person_4.jpg" alt="Image" class="img-fluid mb-3">
-                                <p>Robert Spears</p>
-                            </figure>
-                            <blockquote>
-                                <p>&ldquo;Lorem ipsum dolor sit amet consectetur adipisicing elit. Consectetur unde reprehenderit aperiam quaerat fugiat repudiandae explicabo animi minima fuga beatae illum eligendi incidunt consequatur. Amet dolores excepturi earum unde iusto.&rdquo;</p>
-                            </blockquote>
-                        </div>
-                    </div>
-
-                    <div>
-                        <div class="testimonial">
-                            <figure class="mb-4">
-                                <img src="images/person_5.jpg" alt="Image" class="img-fluid mb-3">
-                                <p>Bruce Rogers</p>
-                            </figure>
-                            <blockquote>
-                                <p>&ldquo;Lorem ipsum dolor sit amet consectetur adipisicing elit. Consectetur unde reprehenderit aperiam quaerat fugiat repudiandae explicabo animi minima fuga beatae illum eligendi incidunt consequatur. Amet dolores excepturi earum unde iusto.&rdquo;</p>
-                            </blockquote>
-                        </div>
-                    </div>
 
                 </div>
             </div>
         </div>
 
 
-        <footer class="site-footer">
+        <footer class="site-footer" style="padding: 1em 0;">
             <div class="container">
                 <div class="row text-center">
                     <div class="col-md-12">
                         <div>
                             <p>
                                 <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
-                                Copyright &copy;<script>document.write(new Date().getFullYear());</script> All rights reserved | This template is made with <i class="icon-heart" aria-hidden="true"></i> by <a href="https://colorlib.com" target="_blank" >Colorlib</a>
+                                Copyright &copy;<script>document.write(new Date().getFullYear());</script> All rights reserved | {{config('app.name')}}
                                 <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
                             </p>
                         </div>
