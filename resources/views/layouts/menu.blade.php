@@ -24,6 +24,6 @@
 </li>
 
 <li class="{{ Request::is('users*') ? 'active' : '' }}">
-    <a href="{!! route('users.index') !!}"><i class="fa fa-edit"></i><span>Users</span></a>
+    <a href="{!! route('users.index') !!}"><i class="fa fa-edit"></i><span>Administrators</span></a>
 </li>
 
