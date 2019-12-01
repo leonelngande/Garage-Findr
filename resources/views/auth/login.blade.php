@@ -9,25 +9,26 @@
     <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
 
     <!-- Bootstrap 3.3.7 -->
-    <link rel="stylesheet" href="{{ asset('login/bootstrap.min.css') }}">
+    <link rel="stylesheet" href="{{ asset('admin-lte/bootstrap.min.css') }}">
 
     <!-- Font Awesome -->
-    <link rel="stylesheet" href="{{ asset('login/font-awesome.min.css') }}">
+    <link rel="stylesheet" href="{{ asset('admin-lte/font-awesome.min.css') }}">
 
     <!-- Ionicons -->
-    <link rel="stylesheet" href="{{ asset('login/ionicons.min.css') }}">
+    <link rel="stylesheet" href="{{ asset('admin-lte/ionicons.min.css') }}">
 
     <!-- Theme style -->
-    <link rel="stylesheet" href="{{ asset('login/AdminLTE.min.css') }}">
-    <link rel="stylesheet" href="{{ asset('login/_all-skins.min.css') }}">
+    <link rel="stylesheet" href="{{ asset('admin-lte/AdminLTE.min.css') }}">
+    <link rel="stylesheet" href="{{ asset('admin-lte/_all-skins.min.css') }}">
 
     <!-- iCheck -->
-    <link rel="stylesheet" href="{{ asset('login/_all.css') }}">
+    <link rel="stylesheet" href="{{ asset('admin-lte/_all.css') }}">
 
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
     <!--[if lt IE 9]>
-
+    <script src="{{ asset('admin-lte/html5shiv.min.js') }}"></script>
+    <script src="{{ asset('admin-lte/respond.min.js') }}"></script>
     <![endif]-->
 
 </head>
@@ -66,7 +67,7 @@
             </div>
             <div class="row">
                 <div class="col-xs-8">
-                    <div class="checkbox icheck">
+                    <div class="checkbox">
                         <label>
                             <input type="checkbox" name="remember"> Remember Me
                         </label>
@@ -81,28 +82,20 @@
         </form>
 
         {{--<a href="{{ url('/password/reset') }}">I forgot my password</a><br>--}}
-        <a href="{{ url('/register') }}" class="text-center">Register a new membership</a>
+{{--        <a href="{{ url('/register') }}" class="text-center">Register a new membership</a>--}}
 
     </div>
     <!-- /.login-box-body -->
 </div>
 <!-- /.login-box -->
 
-<script src="{{ asset('login/jquery.min.js') }}"></script>
-<script src="{{ asset('login/bootstrap.min.js') }}"></script>
+<script src="{{ asset('admin-lte/jquery.min.js') }}"></script>
+<script src="{{ asset('admin-lte/bootstrap.min.js') }}"></script>
 
 <!-- AdminLTE App -->
-<script src="{{ asset('login/adminlte.min.js') }}"></script>
+<script src="{{ asset('admin-lte/adminlte.min.js') }}"></script>
 
-<script src="{{ asset('login/icheck.min.js') }}"></script>
-<script>
-    $(function () {
-        $('input').iCheck({
-            checkboxClass: 'icheckbox_square-blue',
-            radioClass: 'iradio_square-blue',
-            increaseArea: '20%' // optional
-        });
-    });
-</script>
+<script src="{{ asset('admin-lte/icheck.min.js') }}"></script>
+
 </body>
 </html>
