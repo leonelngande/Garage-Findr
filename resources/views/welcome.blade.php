@@ -6,7 +6,7 @@
 
         <title>{{ config('app.name') }}</title>
 
-        <link href="https://fonts.googleapis.com/css?family=Nanum+Gothic:400,700,800" rel="stylesheet">
+        <link href="{{ asset('admin-lte/google-font-nanum-gothic-400-700-800.css') }}" rel="stylesheet">
         <link rel="stylesheet" href="{{ asset('fonts/icomoon/style.css') }}">
 
         <link rel="stylesheet" href="{{ asset('css/bootstrap.min.css') }}">
